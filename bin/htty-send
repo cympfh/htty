@@ -1,19 +1,34 @@
 #!/bin/bash
 
+usage() {
+    echo "Usage: htty-send [-H <hostname>] [-P <port>] <<< 'stdin buffer'"
+    exit 0
+}
+
 host=localhost
 port=8080
-while getopts H:P: OPT; do
-    case $OPT in
-        H)
-            host=$OPTARG
+
+while [ $# -gt 0 ]; do
+    case $1 in
+        --host | -H)
+            host=$2
+            shift 2
             ;;
-        P)
-            port=$OPTARG
+        --port | -P)
+            port=$2
+            shift 2
+            ;;
+        --help | -h )
+            usage
+            ;;
+        * )
+            echo "Unknown option: $1"
+            exit 1
             ;;
     esac
 done
 
 tmp=$(mktemp)
 cat > $tmp
-curl -s localhost:$port -H 'Content-Type: application/octet-stream' --data-binary @$tmp
+curl -s $host:$port -H 'Content-Type: application/octet-stream' --data-binary @$tmp
 rm $tmp
