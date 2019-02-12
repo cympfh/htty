@@ -1,0 +1,19 @@
+#!/bin/bash
+
+host=localhost
+port=8080
+while getopts H:P: OPT; do
+    case $OPT in
+        H)
+            host=$OPTARG
+            ;;
+        P)
+            port=$OPTARG
+            ;;
+    esac
+done
+
+tmp=$(mktemp)
+cat > $tmp
+curl -s localhost:$port -H 'Content-Type: application/octet-stream' --data-binary @$tmp
+rm $tmp

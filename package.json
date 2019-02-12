@@ -1,0 +1,24 @@
+{
+  "name": "htty",
+  "version": "1.0.0",
+  "description": "stdio via http",
+  "main": "index.js",
+  "scripts": {
+    "test": "true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cympfh/htty.git"
+  },
+  "author": "cympfh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cympfh/htty/issues"
+  },
+  "homepage": "https://github.com/cympfh/htty#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "yargs": "^13.1.0"
+  }
+}
