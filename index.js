@@ -31,9 +31,14 @@ child.stderr.on('data', (data) => {
   last_out += data;
 });
 
-child.on('close', (code) => {
-  console.log(`Finished with ${code}`);
-});
+var child_close = (code) => {
+  console.log(`Child process finished with ${code}`);
+  process.exit(code);
+};
+
+child.on('error', (err) => {console.warn(err)})
+child.on('close', child_close);
+child.on('exit', child_close);
 
 function input(buf) {
   last_out = '';
