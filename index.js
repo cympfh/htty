@@ -48,16 +48,7 @@ function input(buf) {
 }
 
 // readline
-const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-rl.on('line', (input) => {
-  child.stdin.write(input);
-  child.stdin.write('\n');
-});
+process.stdin.pipe(child.stdin);
 
 // server
 const express = require('express');
